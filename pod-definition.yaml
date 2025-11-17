@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: firstpod
+  labels:
+    app:  app1
+    type: front-end
+spec:
+  containers:
+    - name: nginx-container #list / array
+      image: nginx
+    - name: postgres-db-container
+      image: postgres
