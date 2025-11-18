@@ -9,5 +9,5 @@ spec:
   containers:
     - name: nginx-container #list / array
       image: nginx
-    - name: postgres-db-container
-      image: postgres
+    - name: grafana-container
+      image: grafana/grafana

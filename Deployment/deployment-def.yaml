@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: front-end-deployment
+  labels:
+    app:  app1
+    type: front-end
+spec:
+  template:
+    metadata:
+      name: firstpod
+      labels:
+        app:  app1
+        type: front-end
+    spec:
+      containers:
+      - name: nginx-container #list / array
+        image: nginx
+  replicas: 2
+  selector:
+    matchLabels:
+      type: front-end
+      app:  app1
+    
+    
