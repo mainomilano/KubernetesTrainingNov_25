@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: back-end-deployment
+  labels:
+    app:  app1
+    type: backend-server
+spec:
+  template:
+    metadata:
+      name: backend-server
+      labels:
+        app:  app1
+        type: backend-server
+    spec: 
+      containers:
+        - name: grafana-container
+          image: grafana/grafana
+  replicas: 3
+  selector:
+    matchLabels:
+      type: backend-server
+      app:  app1
+    
+    

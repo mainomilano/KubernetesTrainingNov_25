@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: backend-server
+  labels:
+    app:  app1
+    type: backend-server
+spec:
+  containers:
+    - name: grafana-container
+      image: grafana/grafana
