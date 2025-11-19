@@ -1,0 +1,65 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  creationTimestamp: '2025-11-19T08:28:56Z'
+  managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:hard:
+            .: {}
+            f:limits.cpu: {}
+            f:limits.memory: {}
+            f:pods: {}
+            f:requests.cpu: {}
+            f:requests.memory: {}
+          f:used:
+            .: {}
+            f:limits.cpu: {}
+            f:limits.memory: {}
+            f:pods: {}
+            f:requests.cpu: {}
+            f:requests.memory: {}
+      manager: k3s
+      operation: Update
+      subresource: status
+      time: '2025-11-19T08:28:56Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:hard:
+            .: {}
+            f:limits.cpu: {}
+            f:limits.memory: {}
+            f:pods: {}
+            f:requests.cpu: {}
+            f:requests.memory: {}
+      manager: steve.exe
+      operation: Update
+      time: '2025-11-19T08:28:56Z'
+  name: project-frontend-ns-quota
+  namespace: project-frontend-n
+  resourceVersion: '286865'
+  uid: 335872b7-85ed-4c59-8ed7-aa5d136abc85
+spec:
+  hard:
+    limits.cpu: '6'
+    limits.memory: 2Gi
+    pods: '30'
+    requests.cpu: '3'
+    requests.memory: 1Gi
+status:
+  hard:
+    limits.cpu: '6'
+    limits.memory: 2Gi
+    pods: '30'
+    requests.cpu: '3'
+    requests.memory: 1Gi
+  used:
+    limits.cpu: '0'
+    limits.memory: '0'
+    pods: '1'
+    requests.cpu: '0'
+    requests.memory: '0'
