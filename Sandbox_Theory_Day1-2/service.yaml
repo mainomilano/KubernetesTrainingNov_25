@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service
+  labels:
+    name: capitec-frontend
+    app: capitec-user-service
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    name: capitec-frontend
+    app: capitec-user-service
+          

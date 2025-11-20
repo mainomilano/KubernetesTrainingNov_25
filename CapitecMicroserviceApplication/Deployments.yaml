@@ -1,0 +1,131 @@
+# FRONTEND ANGULAR DEPLOYMENT
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  namespace: frontend
+  labels:
+    app: frontend-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: frontend-deployment
+  template:
+    metadata:
+      name: frontend-deployment
+      labels:
+        app: frontend-deployment
+    spec:
+      containers:
+        - name: angular-frontend-service
+          image: thapeloseema/capitec-user-service:frontend-amd64v1.0.6
+          ports:
+            - containerPort: 80
+          env:
+            - name: ROOT_URL
+              value: "/api"
+            - name: BACKEND_URL
+              value: "PUT IN CLUSTER IP HERE ! http://backend-service.backend.svc.cluster.local:8080"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+  namespace: frontend
+spec:
+  selector:
+    app: frontend
+  ports:
+    - port: 80
+      targetPort: 80
+  type: NodePort
+  
+---
+# BACKEND SPRINGBOOT DEPLOYMENT
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  namespace: backend
+  labels:
+    app: backend-deployment
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: backend-deployment
+  template:
+    metadata:
+      name: backend-deployment
+      labels:
+        app: backend-deployment
+    spec:
+      containers:
+        - name: springboot-backend-service
+          image: thapeloseema/capitec-user-service:backend-amd64v1.70
+          ports:
+            - containerPort: 8080
+      resources:
+                
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  namespace: backend
+spec:
+  selector:
+    app: backend
+  ports:
+    - port: 80
+      targetPort: 80
+  type: ClusterIP
+  
+---
+#BACKEND DATABASE DEPLOYMENT
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-db-deployment
+  namespace: backend
+  labels:
+    app: backend-db-deployment
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: backend-db-deployment
+  template:
+    metadata:
+      name: backend-db-deployment
+      labels:
+        app: backend-db-deployment
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:9.6
+        ports:
+          - containerPort: 5432
+        env:
+          - name: POSTGRES_HOST_AUTH_METHOD
+            value: trust
+            
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: database service 
+  labels:
+    name: postgres-db-service
+    app: demo-voting-app
+spec:
+  type: ClusterIP
+  ports:
+    - port: 5432
+      targetPort: 5432
+  selector:
+    name:  postgres-pod
+    app: demo-voting-app
+          

@@ -2,7 +2,6 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: capitec-frontend
-  namespace: project-frontend-n
   labels:
     name: capitec-frontend
     app:  capitec-user-service
@@ -12,9 +11,3 @@ spec:
       image: thapeloseema/capitec-user-service:frontend-amd64
       ports:
         -  containerPort: 80
-      resources:
-        requests:
-          memory: "256Mi"
-          cpu: "250m"
-
-  
